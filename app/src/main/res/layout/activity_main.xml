@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.pcvincenzo.bikeracedata.HistoryActivity">
+
+    <TextView
+        android:id="@+id/km_tot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="2156 km"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:divider="?android:dividerHorizontal"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/session_tot"
+                android:text="34"
+                style="@style/PrimaryTextStyle"/>
+            <TextView
+                android:text="Sessioni"
+                style="@style/SecondaryTextStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/duration_tot"
+                android:text="00:19:36"
+                style="@style/PrimaryTextStyle"/>
+            <TextView
+                android:text="Durata"
+                style="@style/SecondaryTextStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:text="30000 m"
+                style="@style/PrimaryTextStyle"/>
+
+            <TextView
+                android:id="@+id/elevation_tot"
+                android:text="Dislivello"
+                style="@style/SecondaryTextStyle"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
