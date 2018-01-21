@@ -13,8 +13,8 @@ public class RaceDbHelper extends SQLiteOpenHelper {
 
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "shelter.db";
+    public static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "races.db";
 
     //Class constructor
     public RaceDbHelper(Context context) {
@@ -22,29 +22,21 @@ public class RaceDbHelper extends SQLiteOpenHelper {
     }
 
     //SQLite TABLE creation
-    private static final String SQL_CREATE_RACES_TABLE_JAN =
-            "CREATE TABLE " + RaceContract.RaceEntryJan.TABLE_NAME + " (" +
-                    RaceContract.RaceEntryJan._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_LOCATION + " TEXT NOT NULL, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_DURATION + " INTEGER DEFAULT 0, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_DISTANCE + " INTEGER NOT NULL, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_ELEVATION + " INTEGER NOT NULL)";
+    private static final String SQL_CREATE_RACES_TABLE =
+            "CREATE TABLE " + RaceContract.RaceEntry.TABLE_NAME + " (" +
+                    RaceContract.RaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    RaceContract.RaceEntry.COLUMN_RACE_LOCATION + " TEXT NOT NULL, " +
+                    RaceContract.RaceEntry.COLUMN_RACE_DATE + " TEXT NOT NULL, " +
+                    RaceContract.RaceEntry.COLUMN_RACE_DURATION + " INTEGER DEFAULT 0, " +
+                    RaceContract.RaceEntry.COLUMN_RACE_DISTANCE + " INTEGER NOT NULL, " +
+                    RaceContract.RaceEntry.COLUMN_RACE_ELEVATION + " INTEGER NOT NULL)";
 
-    private static final String SQL_CREATE_RACES_TABLE_FEB =
-            "CREATE TABLE " + RaceContract.RaceEntryFeb.TABLE_NAME + " (" +
-                    RaceContract.RaceEntryJan._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_LOCATION + " TEXT NOT NULL, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_DURATION + " INTEGER DEFAULT 0, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_DISTANCE + " INTEGER NOT NULL, " +
-                    RaceContract.RaceEntryJan.COLUMN_RACE_ELEVATION + " INTEGER NOT NULL)";
     //SQLite TABLE deleting
     private static final String SQL_DELETE_RACES_TABLE =
-            "DROP TABLE IF EXISTS " + RaceContract.RaceEntryJan.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + RaceContract.RaceEntry.TABLE_NAME;
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_RACES_TABLE_JAN);
-        db.execSQL(SQL_CREATE_RACES_TABLE_FEB);
-
+        db.execSQL(SQL_CREATE_RACES_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

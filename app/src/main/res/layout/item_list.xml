@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
         android:orientation="horizontal"
-        android:paddingRight="8dp"
         android:paddingLeft="8dp">
 
         <TextView
@@ -25,12 +24,28 @@
             android:text="11 Febbraio 2018"
             android:layout_alignParentLeft="true"/>
 
-        <TextView
-            android:id="@+id/race_distance"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="200 km"
-            android:layout_alignParentRight="true"/>
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/race_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="km"
+                android:layout_alignRight="@id/race_distance"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -42,7 +57,7 @@
         android:showDividers="middle">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
@@ -57,7 +72,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
@@ -71,7 +86,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
@@ -85,4 +100,5 @@
                 style="@style/SecondaryTextStyle"/>
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

@@ -1,3 +1,78 @@
 <resources>
     <string name="app_name">BikeRaceData</string>
+
+    <!-- Label for overflow menu option that inserts fake race data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for overflow menu option that deletes all race data in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Races</string>
+
+    <!-- Toast text message when a race is correctly saved in the db-->
+    <string name="editor_insert_race_successful">Race saved</string>
+
+    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
+    <string name="category_overview">Overview</string>
+
+    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_race_location">Location</string>
+
+    <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_race_date">Date</string>
+
+    <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_race_distance">Distance</string>
+
+    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_race_duration">Duration</string>
+
+    <!-- Units for weight of the race (kilograms) [CHAR LIMIT=5] -->
+    <string name="hint_race_elevation">elevation</string>
+
+    <!-- Title for the activity to add a new race [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_new_race">Add a Race</string>
+
+    <!-- Title for the activity to edit a new race [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_race">Edit a Race</string>
+
+    <!-- Toast message in editor when current race was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_race_successful">race updated</string>
+
+    <!-- Toast message in editor when current race has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_race_failed">Error with updating race</string>
+
+    <!-- Toast message in editor when current race has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_missing_text">Please make sure to compile the required fields</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current race [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Label for editor menu option to save race and leave editor [CHAR LIMIT=20] -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current race [CHAR LIMIT=20] -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current race [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this race?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current race [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current race [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Toast message in editor when current race was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_race_successful">race deleted</string>
+
+    <!-- Toast message in editor when current race was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_deleteAll_race_successful">race deleted</string>
+
+    <!-- Toast message in editor when current race has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_race_failed">Error with deleting race</string>
 </resources>

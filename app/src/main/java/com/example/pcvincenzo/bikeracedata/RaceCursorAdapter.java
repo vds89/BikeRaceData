@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import com.example.pcvincenzo.bikeracedata.data.RaceContract;
+
 /**
  * Created by pcvincenzo on 15/01/18.
  */
 
 public class RaceCursorAdapter extends CursorAdapter {
 
+    /** Tag for the log messages */
+    public static final String LOG_TAG = RaceCursorAdapter.class.getSimpleName();
     /**
      * Constructs a new {@link RaceCursorAdapter}.
      *
@@ -43,18 +47,36 @@ public class RaceCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
-        TextView raceDayTextView = (TextView) view.findViewById(R.id.race_day);
+        TextView raceLocationTextView = (TextView) view.findViewById(R.id.race_place);
+        TextView raceDateTextView = (TextView) view.findViewById(R.id.race_day);
+        TextView raceDurationTextView = (TextView) view.findViewById(R.id.race_time);
         TextView raceDistanceTextView = (TextView) view.findViewById(R.id.race_distance);
-        TextView racePlaceTextView = (TextView) view.findViewById(R.id.race_place);
-        TextView raceTimeTextView = (TextView) view.findViewById(R.id.race_time);
         TextView raceElevationTextView = (TextView) view.findViewById(R.id.race_elevation);
 
+        // Find the columns of pet attributes that we're interested in
+        int locationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_LOCATION);
+        int dateColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DATE);
+        int durationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DURATION);
+        int distanceColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DISTANCE);
+
+//        Log.d(LOG_TAG, "==============> distanceColumnIndex" + distanceColumnIndex);
+        int elevationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_ELEVATION);
+
+        // Extract out the value from the Cursor for the given column index
+        String location = cursor.getString(locationColumnIndex);
+        String date = cursor.getString(dateColumnIndex);
+        String duration = cursor.getString(durationColumnIndex);
+//        int distance = cursor.getInt(distanceColumnIndex);
+//        Log.d(LOG_TAG, "==============> distance" + distance);
+
+        int elevation = cursor.getInt(elevationColumnIndex);
+
         // Update the TextViews with the attributes for the current pet
-        raceDayTextView.setText("15 Gennaio 2018");
-        raceDistanceTextView.setText("120 km");
-        racePlaceTextView.setText("Alassio");
-        raceTimeTextView.setText("02:30:00");
-        raceElevationTextView.setText("1500 m");
+        raceLocationTextView.setText(location);
+        raceDateTextView.setText(date);
+        raceDurationTextView.setText(duration);
+//        raceDistanceTextView.setText(Integer.toString(distance));
+        raceElevationTextView.setText(Integer.toString(elevation));
     }
 
 

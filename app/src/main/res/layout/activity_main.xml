@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.pcvincenzo.bikeracedata.HistoryActivity">
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_plus"
+        />
+</RelativeLayout>
+
+    <!-- HEADER
     <TextView
         android:id="@+id/km_tot"
         android:layout_width="match_parent"
@@ -66,9 +83,5 @@
                 android:text="Dislivello"
                 style="@style/SecondaryTextStyle"/>
         </LinearLayout>
-
     </LinearLayout>
-
-
-
-</LinearLayout>
+-->
