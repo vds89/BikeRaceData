@@ -142,9 +142,10 @@ public class HistoryActivity extends AppCompatActivity implements
         // you will actually use after this query.
         String[] PROJECTION = {
                 RaceContract.RaceEntry._ID,
-                RaceContract.RaceEntry.COLUMN_RACE_DATE,
                 RaceContract.RaceEntry.COLUMN_RACE_LOCATION,
+                RaceContract.RaceEntry.COLUMN_RACE_DATE,
                 RaceContract.RaceEntry.COLUMN_RACE_DURATION,
+                RaceContract.RaceEntry.COLUMN_RACE_DISTANCE,
                 RaceContract.RaceEntry.COLUMN_RACE_ELEVATION
         };
 
