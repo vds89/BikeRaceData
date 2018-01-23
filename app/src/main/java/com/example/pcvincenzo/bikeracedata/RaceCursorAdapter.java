@@ -2,7 +2,6 @@ package com.example.pcvincenzo.bikeracedata;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,15 +53,11 @@ public class RaceCursorAdapter extends CursorAdapter {
         TextView raceDistanceTextView = (TextView) view.findViewById(R.id.race_distance);
         TextView raceElevationTextView = (TextView) view.findViewById(R.id.race_elevation);
 
-        //if (cursor.moveToFirst()) {
-            // Find the columns of pet attributes that we're interested in
-            int idColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry._ID);
+            // Find the columns of race attributes that we're interested in
             int locationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_LOCATION);
             int dateColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DATE);
             int durationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DURATION);
             int distanceColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DISTANCE);
-
-//        Log.d(LOG_TAG, "==============> distanceColumnIndex" + distanceColumnIndex);
             int elevationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_ELEVATION);
 
             // Extract out the value from the Cursor for the given column index
@@ -70,16 +65,13 @@ public class RaceCursorAdapter extends CursorAdapter {
             String date = cursor.getString(dateColumnIndex);
             String duration = cursor.getString(durationColumnIndex);
             int distance = cursor.getInt(distanceColumnIndex);
-            Log.d(LOG_TAG, "==============> distance" + distance);
-
             int elevation = cursor.getInt(elevationColumnIndex);
 
-            // Update the TextViews with the attributes for the current pet
+            // Update the TextViews with the attributes for the current race
             raceLocationTextView.setText(location);
             raceDateTextView.setText(date);
             raceDurationTextView.setText(duration);
             raceDistanceTextView.setText(Integer.toString(distance));
             raceElevationTextView.setText(Integer.toString(elevation));
-        //}
     }
 }

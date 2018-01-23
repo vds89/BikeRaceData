@@ -1,6 +1,7 @@
 package com.example.pcvincenzo.bikeracedata;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,6 +53,28 @@ public class HistoryActivity extends AppCompatActivity implements
         mAdapter = new RaceCursorAdapter(this, null);
         // Sets the adapter for the view
         raceListView.setAdapter(mAdapter);
+
+        //Set up the click listener
+        raceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            //When a Pet in the list is clicked on, open its Edit Tab
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                // Get the Intent that started Editor activity
+                Intent intent = new Intent(HistoryActivity.this, EditorActivity.class);
+
+                //Form the content URI that represent the specific pet that was clicked on,
+                //by appending the "id" (passed as an input to this method) onto the
+                //{@link PetEntry#CONTENT_URI}.
+                //For example, the URI will be content://com.example.android.pets/pets/2
+                //if the pet with ID=2 was clicked on
+                intent.setData(ContentUris.withAppendedId(CONTENT_URI, id));
+
+                // Send the intent to launch a new activity
+                startActivity(intent);
+            }
+        });
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
@@ -103,9 +127,9 @@ public class HistoryActivity extends AppCompatActivity implements
 
         // Deletes the pet that match the selection criteria
         int mRowsDeleted = getContentResolver().delete(
-                RaceContract.RaceEntry.CONTENT_URI,                     // the user dictionary content URI
-                null,                    // the column to select on
-                null                      // the value to compare to
+                RaceContract.RaceEntry.CONTENT_URI,     // the user dictionary content URI
+                null,                                   // the column to select on
+                null                                    // the value to compare to
         );
 
         // Show a toast message depending on whether or not the update was successful.

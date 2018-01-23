@@ -29,36 +29,43 @@
             android:paddingLeft="4dp"
             android:orientation="vertical">
 
-            <!-- Name field -->
+            <!-- Location field -->
             <EditText
                 android:id="@+id/edit_race_location"
                 android:hint="@string/hint_race_location"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Breed field -->
+            <!-- Date field -->
             <EditText
                 android:id="@+id/edit_race_date"
                 android:hint="@string/hint_race_date"
                 android:inputType="textCapWords"
+                android:clickable="true"
+                android:focusable="false"
                 style="@style/EditorFieldStyle" />
-            <!-- Breed field -->
+
+            <!-- Duration field -->
             <EditText
                 android:id="@+id/edit_race_duration"
                 android:hint="@string/hint_race_duration"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
-            <!-- Breed field -->
+
+            <!-- Distance field -->
             <EditText
                 android:id="@+id/edit_race_distance"
                 android:hint="@string/hint_race_distance"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
+
+            <!-- Elevation field -->
             <EditText
                 android:id="@+id/edit_race_elevation"
                 android:hint="@string/hint_race_elevation"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

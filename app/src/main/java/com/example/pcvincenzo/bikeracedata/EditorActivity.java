@@ -1,6 +1,7 @@
 package com.example.pcvincenzo.bikeracedata;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -17,10 +18,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pcvincenzo.bikeracedata.data.RaceContract;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by pcvincenzo on 15/01/18.
@@ -28,6 +34,9 @@ import com.example.pcvincenzo.bikeracedata.data.RaceContract;
 
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
+
+    /** Tag for the log messages */
+    public static final String LOG_TAG = EditorActivity.class.getSimpleName();
 
     /**
      * Identifier for the pet data loader
@@ -70,6 +79,12 @@ public class EditorActivity extends AppCompatActivity implements
      * pet has been edited (true) or not (false)
      */
     private boolean mRaceHasChanged = false;
+
+    /**
+     * Calendar field to enter the race data
+     */
+    private Calendar myCalendar = Calendar.getInstance();
+
 
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
@@ -117,6 +132,33 @@ public class EditorActivity extends AppCompatActivity implements
         mDistanceEditText = (EditText) findViewById(R.id.edit_race_distance);
         mElevationEditText = (EditText) findViewById(R.id.edit_race_elevation);
 
+
+        mDateEditText.setOnClickListener(new View.OnClickListener() {
+
+
+        DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "dd/MM/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
+                mDateEditText.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        @Override
+            public void onClick(View view) {
+                new DatePickerDialog(EditorActivity.this, datePickerListener, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
@@ -125,6 +167,8 @@ public class EditorActivity extends AppCompatActivity implements
         mDateEditText.setOnTouchListener(mTouchListener);
         mDistanceEditText.setOnTouchListener(mTouchListener);
         mElevationEditText.setOnTouchListener(mTouchListener);
+
+
 
     }
 
@@ -339,11 +383,10 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Update the views on the screen with the values from the database
             mLocationEditText.setText(location);
-            mLocationEditText.setText(date);
+            mDateEditText.setText(date);
             mDurationEditText.setText(duration);
             mDistanceEditText.setText(Integer.toString(distance));
             mElevationEditText.setText(Integer.toString(elevation));
-
         }
     }
 
