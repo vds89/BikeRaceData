@@ -209,7 +209,7 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(RaceContract.RaceEntry.COLUMN_RACE_DISTANCE, distanceString);
         values.put(RaceContract.RaceEntry.COLUMN_RACE_ELEVATION, elevationString);
 
-        // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not
+        // Determine if this is a new or existing race by checking if mCurrentPetUri is null or not
         if (mCurrentRaceUri == null) {
             // This is a NEW pet, so insert a new pet into the provider,
             // returning the content URI for the new pet.

@@ -141,6 +141,13 @@ public class HistoryActivity extends AppCompatActivity implements
             // Otherwise, the update was successful and we can display a toast.
             Toast.makeText(this, getString(R.string.editor_deleteAll_race_successful),
                     Toast.LENGTH_SHORT).show();
+
+            // Find the ListView which will be populated with the race data
+            ListView raceListView = (ListView) findViewById(R.id.list);
+            // Setup cursor adapter using null cursor
+            mAdapter = new RaceCursorAdapter(this, null);
+            // Sets the adapter for the view
+            raceListView.setAdapter(mAdapter);
         }
     }
 

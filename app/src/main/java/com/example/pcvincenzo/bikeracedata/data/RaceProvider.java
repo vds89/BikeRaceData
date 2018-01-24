@@ -261,12 +261,15 @@ public class RaceProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case RACES:
+
                 if (mRowsDeleted != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 // Delete all rows that match the selection and selection args
                 mRowsDeleted = database.delete(RaceContract.RaceEntry.TABLE_NAME, selection, selectionArgs);
+
                 return mRowsDeleted;
+
             case RACE_ID:
                 // Delete a single row given by the ID in the URI
                 selection = RaceContract.RaceEntry._ID + "=?";
@@ -276,6 +279,7 @@ public class RaceProvider extends ContentProvider {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 mRowsDeleted = database.delete(RaceContract.RaceEntry.TABLE_NAME, selection, selectionArgs);
+
                 return mRowsDeleted;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
