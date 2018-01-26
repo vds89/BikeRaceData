@@ -25,8 +25,11 @@ import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.CO
 public class HistoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    public static final String LOG_TAG = HistoryActivity.class.getSimpleName();
+
     // Identifies a particular Loader being used in this component
     private static final int RACE_LOADER = 0;
+
 
     // This is the Adapter being used to display the list's data
     RaceCursorAdapter mAdapter;
@@ -85,6 +88,8 @@ public class HistoryActivity extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -215,4 +220,5 @@ public class HistoryActivity extends AppCompatActivity implements
         // longer using it.
         mAdapter.swapCursor(null);
     }
+
 }

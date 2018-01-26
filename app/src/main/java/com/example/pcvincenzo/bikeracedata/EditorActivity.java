@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.CONTENT_URI;
+
 /**
  * Created by pcvincenzo on 15/01/18.
  */
@@ -484,6 +486,8 @@ public class EditorActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }
+        //Update the ListView after item cancellation
+        getContentResolver().notifyChange(CONTENT_URI, null);
         // Close the activity
         finish();
     }

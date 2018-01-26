@@ -74,4 +74,6 @@ public class RaceCursorAdapter extends CursorAdapter {
             raceDistanceTextView.setText(Integer.toString(distance));
             raceElevationTextView.setText(Integer.toString(elevation));
     }
+
+
 }
