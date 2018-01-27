@@ -18,6 +18,7 @@ public class RaceCursorAdapter extends CursorAdapter {
 
     /** Tag for the log messages */
     public static final String LOG_TAG = RaceCursorAdapter.class.getSimpleName();
+
     /**
      * Constructs a new {@link RaceCursorAdapter}.
      *
@@ -25,6 +26,7 @@ public class RaceCursorAdapter extends CursorAdapter {
      * @param c       The cursor from which to get the data.
      */
     public RaceCursorAdapter(Context context, Cursor c) {
+
         super(context, c, 0 /* flags */);
     }
 
@@ -53,7 +55,7 @@ public class RaceCursorAdapter extends CursorAdapter {
         TextView raceDistanceTextView = (TextView) view.findViewById(R.id.race_distance);
         TextView raceElevationTextView = (TextView) view.findViewById(R.id.race_elevation);
 
-            // Find the columns of race attributes that we're interested in
+        // Find the columns of race attributes that we're interested in
             int locationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_LOCATION);
             int dateColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DATE);
             int durationColumnIndex = cursor.getColumnIndex(RaceContract.RaceEntry.COLUMN_RACE_DURATION);
@@ -74,6 +76,4 @@ public class RaceCursorAdapter extends CursorAdapter {
             raceDistanceTextView.setText(Integer.toString(distance));
             raceElevationTextView.setText(Integer.toString(elevation));
     }
-
-
 }

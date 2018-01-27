@@ -16,56 +16,121 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
-        <TextView
-            android:text="@string/category_overview"
-            style="@style/CategoryStyle" />
-
         <!-- Input fields -->
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="4dp"
             android:orientation="vertical">
 
-            <!-- Location field -->
-            <EditText
-                android:id="@+id/edit_race_location"
-                android:hint="@string/hint_race_location"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <!-- Date field -->
-            <EditText
-                android:id="@+id/edit_race_date"
-                android:hint="@string/hint_race_date"
-                android:inputType="textCapWords"
-                android:clickable="true"
-                android:focusable="false"
-                style="@style/EditorFieldStyle" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_location" />
 
-            <!-- Duration field -->
-            <EditText
-                android:id="@+id/edit_race_duration"
-                android:hint="@string/hint_race_duration"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                <!-- Location field -->
+                <EditText
+                    android:id="@+id/edit_race_location"
+                    android:hint="@string/hint_race_location"
+                    android:inputType="textCapWords"
+                    android:padding="16dp"
+                    style="@style/EditorFieldStyle" />
 
-            <!-- Distance field -->
-            <EditText
-                android:id="@+id/edit_race_distance"
-                android:hint="@string/hint_race_distance"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+            </LinearLayout>
 
-            <!-- Elevation field -->
-            <EditText
-                android:id="@+id/edit_race_elevation"
-                android:hint="@string/hint_race_elevation"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_date"/>
+                <!-- Date field -->
+                <EditText
+                    android:id="@+id/edit_race_date"
+                    android:hint="@string/hint_race_date"
+                    android:inputType="textCapWords"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:padding="16dp"
+                    style="@style/EditorFieldStyle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_duration"/>
+                <!-- Duration field -->
+                <EditText
+                    android:id="@+id/edit_race_duration"
+                    android:hint="@string/hint_race_duration"
+                    android:inputType="textCapWords"
+                    android:padding="16dp"
+                    style="@style/EditorFieldStyle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_distance"/>
+                <!-- Distance field -->
+                <EditText
+                    android:id="@+id/edit_race_distance"
+                    android:hint="@string/hint_race_distance"
+                    android:inputType="textCapWords"
+                    android:padding="16dp"
+                    style="@style/EditorFieldStyle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_elevation"/>
+                <!-- Elevation field -->
+                <EditText
+                    android:id="@+id/edit_race_elevation"
+                    android:hint="@string/hint_race_elevation"
+                    android:inputType="textCapWords"
+                    android:padding="16dp"
+                    style="@style/EditorFieldStyle" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

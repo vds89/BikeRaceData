@@ -7,42 +7,49 @@
     android:layout_height="match_parent"
     tools:context="com.example.pcvincenzo.bikeracedata.HistoryActivity">
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_plus"
-        />
-</RelativeLayout>
-
-    <!-- HEADER
-    <TextView
+<LinearLayout
+    android:id="@+id/tot_overview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+    <LinearLayout
         android:id="@+id/km_tot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="2156 km"
-        android:textSize="50sp"
-        android:textAlignment="center"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/km_tot_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="50sp"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="km"
+            android:textSize="50sp"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:divider="?android:dividerHorizontal"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:layout_below="@id/km_tot">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
@@ -56,7 +63,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
@@ -70,18 +77,37 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
+                android:id="@+id/elevation_tot"
                 android:text="30000 m"
                 style="@style/PrimaryTextStyle"/>
 
             <TextView
-                android:id="@+id/elevation_tot"
                 android:text="Dislivello"
                 style="@style/SecondaryTextStyle"/>
         </LinearLayout>
     </LinearLayout>
--->
+</LinearLayout>
+
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tot_overview">
+    </ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_plus"
+        />
+</RelativeLayout>

@@ -7,20 +7,28 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pcvincenzo.bikeracedata.data.RaceContract;
+import com.example.pcvincenzo.bikeracedata.data.RaceDbHelper;
 
+import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.COLUMN_RACE_DISTANCE;
+import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.COLUMN_RACE_ELEVATION;
 import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.CONTENT_URI;
+import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.TABLE_NAME;
 
 public class HistoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -33,6 +41,9 @@ public class HistoryActivity extends AppCompatActivity implements
 
     // This is the Adapter being used to display the list's data
     RaceCursorAdapter mAdapter;
+
+    /** Database Helper object */
+    private RaceDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,16 @@ public class HistoryActivity extends AppCompatActivity implements
 
         // Find the ListView which will be populated with the race data
         ListView raceListView = (ListView) findViewById(R.id.list);
+
+
+        TextView totaldistanceTextView = (TextView) findViewById(R.id.km_tot_sum);
+        TextView totalSessionsTextView = (TextView) findViewById(R.id.session_tot);
+        TextView totalElevationTextView = (TextView) findViewById(R.id.elevation_tot);
+
+        totaldistanceTextView.setText(Integer.toString(getDistanceColumnSum()));
+        totalSessionsTextView.setText(Long.toString(getSessionsColumnSum()));
+        totalElevationTextView.setText(Integer.toString(getElevationColumnSum()));
+
 
         // Setup cursor adapter using null cursor
         mAdapter = new RaceCursorAdapter(this, null);
@@ -147,12 +168,7 @@ public class HistoryActivity extends AppCompatActivity implements
             Toast.makeText(this, getString(R.string.editor_deleteAll_race_successful),
                     Toast.LENGTH_SHORT).show();
 
-            // Find the ListView which will be populated with the race data
-            ListView raceListView = (ListView) findViewById(R.id.list);
-            // Setup cursor adapter using null cursor
-            mAdapter = new RaceCursorAdapter(this, null);
-            // Sets the adapter for the view
-            raceListView.setAdapter(mAdapter);
+            getContentResolver().notifyChange(CONTENT_URI,null);
         }
     }
 
@@ -221,4 +237,51 @@ public class HistoryActivity extends AppCompatActivity implements
         mAdapter.swapCursor(null);
     }
 
+    public int getDistanceColumnSum() {
+
+        mDbHelper = new RaceDbHelper(this);
+
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT SUM(" + COLUMN_RACE_DISTANCE + ") as TotalDistance FROM "
+                + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+
+            int total = cursor.getInt(cursor.getColumnIndex("TotalDistance"));// get final total
+
+            Log.d(LOG_TAG,"=================> TOTAL DISTANCE= " + total);
+            return total;
+        }
+        return 0;
+    }
+
+    public long getSessionsColumnSum() {
+
+        mDbHelper = new RaceDbHelper(this);
+
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(database, TABLE_NAME);
+        Log.d(LOG_TAG,"=================> TOTAL RACES= " + count);
+        return count;
+    }
+
+    public int getElevationColumnSum() {
+
+        mDbHelper = new RaceDbHelper(this);
+
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT SUM(" + COLUMN_RACE_ELEVATION + ") as TotalElevation FROM "
+                + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+
+            int total = cursor.getInt(cursor.getColumnIndex("TotalElevation"));// get final total
+
+            Log.d(LOG_TAG,"=================> TOTAL ELEVATION= " + total);
+            return total;
+        }
+        return 0;
+    }
 }
