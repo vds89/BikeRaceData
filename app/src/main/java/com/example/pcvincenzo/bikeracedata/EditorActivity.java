@@ -243,6 +243,7 @@ public class EditorActivity extends AppCompatActivity implements
                 // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_race_successful),
                         Toast.LENGTH_SHORT).show();
+
             }
         }
     }

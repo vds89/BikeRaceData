@@ -45,6 +45,8 @@ public class HistoryActivity extends AppCompatActivity implements
     /** Database Helper object */
     private RaceDbHelper mDbHelper;
 
+    public static final String EXTRA_MESSAGE = "com.example.pcvincenzo.bikedata.MESSAGE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,16 +64,6 @@ public class HistoryActivity extends AppCompatActivity implements
 
         // Find the ListView which will be populated with the race data
         ListView raceListView = (ListView) findViewById(R.id.list);
-
-
-        TextView totaldistanceTextView = (TextView) findViewById(R.id.km_tot_sum);
-        TextView totalSessionsTextView = (TextView) findViewById(R.id.session_tot);
-        TextView totalElevationTextView = (TextView) findViewById(R.id.elevation_tot);
-
-        totaldistanceTextView.setText(Integer.toString(getDistanceColumnSum()));
-        totalSessionsTextView.setText(Long.toString(getSessionsColumnSum()));
-        totalElevationTextView.setText(Integer.toString(getElevationColumnSum()));
-
 
         // Setup cursor adapter using null cursor
         mAdapter = new RaceCursorAdapter(this, null);
@@ -107,9 +99,16 @@ public class HistoryActivity extends AppCompatActivity implements
 
     @Override
     protected void onStart() {
+
         super.onStart();
     }
 
+    @Override
+    protected void onResume(){
+        //Update TextView in the overview after Race insertion
+        updateTextView();
+        super.onResume();
+    }
 
 
     @Override
@@ -143,6 +142,9 @@ public class HistoryActivity extends AppCompatActivity implements
             // The insertion was successful and we can display a toast.
             Toast.makeText(this, getString(R.string.editor_insert_race_successful),
                     Toast.LENGTH_SHORT).show();
+            getContentResolver().notifyChange(CONTENT_URI,null);
+            //Update TextView in the overview after Race insertion
+            updateTextView();
         }
         //Log.v("CatalogActivity", "New row ID " + newRowId);
     }
@@ -167,8 +169,10 @@ public class HistoryActivity extends AppCompatActivity implements
             // Otherwise, the update was successful and we can display a toast.
             Toast.makeText(this, getString(R.string.editor_deleteAll_race_successful),
                     Toast.LENGTH_SHORT).show();
-
+            //Update list item after deletion
             getContentResolver().notifyChange(CONTENT_URI,null);
+            //Update overview TextViews after deletion
+            updateTextView();
         }
     }
 
@@ -186,6 +190,19 @@ public class HistoryActivity extends AppCompatActivity implements
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /** Called when the user clicks the Send button */
+    public void updateTextView() {
+
+        TextView totaldistanceTextView = (TextView) findViewById(R.id.km_tot_sum);
+        TextView totalSessionsTextView = (TextView) findViewById(R.id.session_tot);
+        TextView totalElevationTextView = (TextView) findViewById(R.id.elevation_tot);
+
+        totaldistanceTextView.setText(Integer.toString(getDistanceColumnSum()));
+        totalSessionsTextView.setText(Long.toString(getSessionsColumnSum()));
+        totalElevationTextView.setText(Integer.toString(getElevationColumnSum()));
+
     }
 
     @Override
@@ -225,7 +242,6 @@ public class HistoryActivity extends AppCompatActivity implements
         // Swap the new cursor in.  (The framework will take care of closing the
         // old cursor once we return.)
         mAdapter.swapCursor(cursor);
-
     }
 
     @Override
