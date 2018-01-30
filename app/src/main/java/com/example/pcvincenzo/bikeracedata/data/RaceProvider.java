@@ -126,10 +126,10 @@ public class RaceProvider extends ContentProvider {
         }
 
         // Check that the name is not null
-        Integer duration = values.getAsInteger(RaceContract.RaceEntry.COLUMN_RACE_DURATION);
-        if (duration == null) {
-            throw new IllegalArgumentException("Race requires a duration");
-        }
+        //Integer duration = values.getAsInteger(RaceContract.RaceEntry.COLUMN_RACE_DURATION);
+        //if (duration == null) {
+            //throw new IllegalArgumentException("Race requires a duration");
+        //}
 
         // Check that the breed is not null
         Integer distance = values.getAsInteger(RaceContract.RaceEntry.COLUMN_RACE_DISTANCE);

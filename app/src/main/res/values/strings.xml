@@ -23,7 +23,7 @@
     <string name="hint_race_distance">Distance</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_race_duration">Duration</string>
+    <string name="hint_race_duration">HH:mm:ss</string>
 
     <!-- Units for weight of the race (kilograms) [CHAR LIMIT=5] -->
     <string name="hint_race_elevation">elevation</string>

@@ -10,7 +10,9 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,7 +27,10 @@ import android.widget.Toast;
 import com.example.pcvincenzo.bikeracedata.data.RaceContract;
 import com.example.pcvincenzo.bikeracedata.data.RaceDbHelper;
 
+import java.time.LocalTime;
+
 import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.COLUMN_RACE_DISTANCE;
+import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.COLUMN_RACE_DURATION;
 import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.COLUMN_RACE_ELEVATION;
 import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.CONTENT_URI;
 import static com.example.pcvincenzo.bikeracedata.data.RaceContract.RaceEntry.TABLE_NAME;
@@ -125,8 +130,8 @@ public class HistoryActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
 
         values.put(RaceContract.RaceEntry.COLUMN_RACE_LOCATION, "Torino");
-        values.put(RaceContract.RaceEntry.COLUMN_RACE_DATE, "20 Gennaio 2018");
-        values.put(RaceContract.RaceEntry.COLUMN_RACE_DURATION, "2");
+        values.put(RaceContract.RaceEntry.COLUMN_RACE_DATE, "01/01/89");
+        values.put(COLUMN_RACE_DURATION, "00:00:01");
         values.put(RaceContract.RaceEntry.COLUMN_RACE_DISTANCE, "120");
         values.put(RaceContract.RaceEntry.COLUMN_RACE_ELEVATION, "2300");
 
@@ -197,10 +202,12 @@ public class HistoryActivity extends AppCompatActivity implements
 
         TextView totaldistanceTextView = (TextView) findViewById(R.id.km_tot_sum);
         TextView totalSessionsTextView = (TextView) findViewById(R.id.session_tot);
+        TextView totalDurationTextView = (TextView) findViewById(R.id.duration_tot);
         TextView totalElevationTextView = (TextView) findViewById(R.id.elevation_tot);
 
         totaldistanceTextView.setText(Integer.toString(getDistanceColumnSum()));
         totalSessionsTextView.setText(Long.toString(getSessionsColumnSum()));
+        totalDurationTextView.setText(getDurationColumnSum());
         totalElevationTextView.setText(Integer.toString(getElevationColumnSum()));
 
     }
@@ -213,7 +220,7 @@ public class HistoryActivity extends AppCompatActivity implements
                 RaceContract.RaceEntry._ID,
                 RaceContract.RaceEntry.COLUMN_RACE_LOCATION,
                 RaceContract.RaceEntry.COLUMN_RACE_DATE,
-                RaceContract.RaceEntry.COLUMN_RACE_DURATION,
+                COLUMN_RACE_DURATION,
                 RaceContract.RaceEntry.COLUMN_RACE_DISTANCE,
                 RaceContract.RaceEntry.COLUMN_RACE_ELEVATION
         };
@@ -265,8 +272,8 @@ public class HistoryActivity extends AppCompatActivity implements
         if (cursor.moveToFirst()) {
 
             int total = cursor.getInt(cursor.getColumnIndex("TotalDistance"));// get final total
-
             Log.d(LOG_TAG,"=================> TOTAL DISTANCE= " + total);
+
             return total;
         }
         return 0;
@@ -281,6 +288,33 @@ public class HistoryActivity extends AppCompatActivity implements
         Log.d(LOG_TAG,"=================> TOTAL RACES= " + count);
         return count;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getDurationColumnSum() {
+
+        mDbHelper = new RaceDbHelper(this);
+
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT sum(strftime('%s'," + COLUMN_RACE_DURATION + ") - strftime('%s', '00:00:00')) FROM " + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+
+            //String total = cursor.getString(cursor.getColumnIndex("TotalDuration"));// get final total
+            String[] names = cursor.getColumnNames(); // inspect this as it should have a length of 1
+            String total = cursor.getString(cursor.getColumnIndex(names[0]));
+            Log.d(LOG_TAG,"=================> TOTAL DURATION IN SECONDS= " + total);
+
+            if(total != null) {
+                LocalTime timeOfDay = LocalTime.ofSecondOfDay(Integer.parseInt(total));
+                String time = timeOfDay.toString();
+                Log.d(LOG_TAG, "=================> TOTAL DURATION= " + time);
+                return time;
+            }
+        }
+        return "00:00:00";
+    }
+
 
     public int getElevationColumnSum() {
 
